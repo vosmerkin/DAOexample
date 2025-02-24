@@ -35,10 +35,14 @@ public class Main {
     public static void getAll(Connection connection) throws SQLException {
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery("SELECT * FROM customer;");
-//        ResultSet rs = statement.executeQuery("select * from information_schema.tables;");
         while (rs.next()) {
             System.out.println(rs.getInt(1));
         }
+    }
+
+    public  static void getAllSortedLimited(Connection connection){
+        CustomerDao customerDao = new CustomerDao(connection);
+        customerDao.findAllSortedLimited(10).forEach(System.out::println);
     }
 
 }
